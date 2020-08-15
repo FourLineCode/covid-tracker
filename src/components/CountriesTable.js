@@ -67,8 +67,8 @@ const CountriesTable = () => {
 		if (input === '') return
 		const newCountries = Countries.filter((country) => {
 			return (
-				country.Country.toLowerCase().includes(name) ||
-				country.CountryCode.toLowerCase().includes(name)
+				country.Country.toLowerCase().includes(name.toLowerCase()) ||
+				country.CountryCode.toLowerCase().includes(name.toLowerCase())
 			)
 		})
 		setFilteredCountries(newCountries)
