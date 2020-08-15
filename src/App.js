@@ -1,11 +1,14 @@
 import React from 'react'
-import { Typography } from '@material-ui/core'
+import Navbar from './components/Navbar'
+import Stats from './components/Stats'
+import { StatsContextProvider } from './store/StatsContext'
 
 function App() {
 	return (
-		<div className='App'>
-			<Typography variant='h3'>Coronavirus Tracker</Typography>
-		</div>
+		<StatsContextProvider>
+			<Navbar />
+			<Stats />
+		</StatsContextProvider>
 	)
 }
 
