@@ -29,7 +29,7 @@ const Navbar = () => {
 						className={classes.icon}
 					/>
 					<Typography variant='h4' color='inherit'>
-						Coronavirus Tracker
+						<strong>Coronavirus Tracker</strong>
 					</Typography>
 				</Toolbar>
 			</AppBar>
