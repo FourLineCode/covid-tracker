@@ -13,14 +13,25 @@ export const StatsContextProvider = ({ children }) => {
 			)
 			const data = await response.data
 
-			setState(data)
+			if (data) {
+				setState(data)
+				localStorage.setItem('state', JSON.stringify(data))
+				localStorage.setItem('lastCalled', Date.now())
+			}
 		} catch (error) {
 			console.log(error)
 		}
 	}
 
 	useEffect(() => {
-		fetchData()
+		const data = JSON.parse(localStorage.getItem('state'))
+		const lastTime = JSON.parse(localStorage.getItem('lastCalled'))
+		const delayTime = 3600 * 1000 // 1 hour
+		if (data && Date.now() < lastTime + delayTime) {
+			setState(data)
+		} else {
+			fetchData()
+		}
 	}, [])
 
 	return (

@@ -12,7 +12,6 @@ import {
 	Typography,
 	Paper,
 	Grid,
-	CircularProgress,
 	TextField,
 	Button,
 } from '@material-ui/core'
@@ -85,6 +84,21 @@ const CountriesTable = () => {
 			Math.min(rowsPerPage, filteredCountries.length - page * rowsPerPage)
 	}
 
+	const generateStatsJsx = (givenClass, givenStat) => {
+		return (
+			<TableCell align='right' className={givenClass}>
+				<strong>
+					<CountUp
+						start={givenStat - givenStat * 0.1}
+						end={givenStat}
+						duration={1}
+						separator=','
+					/>
+				</strong>
+			</TableCell>
+		)
+	}
+
 	return filteredCountries ? (
 		<Grid item sm={10} className={classes.root}>
 			<Paper className={classes.paper}>
@@ -147,101 +161,30 @@ const CountriesTable = () => {
 													{row.CountryCode})
 												</strong>
 											</TableCell>
-											<TableCell
-												align='right'
-												className={classes.confirmed}>
-												<strong>
-													<CountUp
-														start={
-															row.TotalConfirmed -
-															row.TotalConfirmed *
-																0.1
-														}
-														end={row.TotalConfirmed}
-														duration={1}
-														separator=','
-													/>
-												</strong>
-											</TableCell>
-											<TableCell
-												align='right'
-												className={classes.confirmed}>
-												<strong>
-													<CountUp
-														start={
-															row.NewConfirmed -
-															row.NewConfirmed *
-																0.1
-														}
-														end={row.NewConfirmed}
-														duration={1}
-														separator=','
-													/>
-												</strong>
-											</TableCell>
-											<TableCell
-												align='right'
-												className={classes.recovered}>
-												<strong>
-													<CountUp
-														start={
-															row.TotalRecovered -
-															row.TotalRecovered *
-																0.1
-														}
-														end={row.TotalRecovered}
-														duration={1}
-														separator=','
-													/>
-												</strong>
-											</TableCell>
-											<TableCell
-												align='right'
-												className={classes.recovered}>
-												<strong>
-													<CountUp
-														start={
-															row.NewRecovered -
-															row.NewRecovered *
-																0.1
-														}
-														end={row.NewRecovered}
-														duration={1}
-														separator=','
-													/>
-												</strong>
-											</TableCell>
-											<TableCell
-												align='right'
-												className={classes.deaths}>
-												<strong>
-													<CountUp
-														start={
-															row.TotalDeaths -
-															row.TotalDeaths *
-																0.1
-														}
-														end={row.TotalDeaths}
-														duration={1}
-														separator=','
-													/>
-												</strong>
-											</TableCell>
-											<TableCell
-												align='right'
-												className={classes.deaths}>
-												<strong>
-													<CountUp
-														start={
-															row.NewDeaths -
-															row.NewDeaths * 0.1
-														}
-														end={row.NewDeaths}
-														duration={1}
-														separator=','
-													/>
-												</strong>
-											</TableCell>
+											{generateStatsJsx(
+												classes.confirmed,
+												row.TotalConfirmed
+											)}
+											{generateStatsJsx(
+												classes.confirmed,
+												row.NewConfirmed
+											)}
+											{generateStatsJsx(
+												classes.recovered,
+												row.TotalRecovered
+											)}
+											{generateStatsJsx(
+												classes.recovered,
+												row.NewRecovered
+											)}
+											{generateStatsJsx(
+												classes.deaths,
+												row.TotalDeaths
+											)}
+											{generateStatsJsx(
+												classes.deaths,
+												row.NewDeaths
+											)}
 										</TableRow>
 									)
 								})}
@@ -267,9 +210,7 @@ const CountriesTable = () => {
 				/>
 			</Paper>
 		</Grid>
-	) : (
-		<CircularProgress className={classes.spinner} />
-	)
+	) : null
 }
 
 const useStyles = makeStyles((theme) => ({
