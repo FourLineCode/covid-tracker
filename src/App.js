@@ -10,13 +10,9 @@ const App = () => {
 	return (
 		<StatsContextProvider>
 			<Navbar />
-			<Grid container>
-				<Grid item sm={1} />
+			<Grid container justify='center'>
 				<Stats />
-				<Grid item sm={1} />
-				<Grid item sm={1} />
 				<CountriesTable />
-				<Grid item sm={1} />
 			</Grid>
 		</StatsContextProvider>
 	)

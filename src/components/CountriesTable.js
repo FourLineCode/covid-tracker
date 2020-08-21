@@ -1,11 +1,10 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import {
 	TableBody,
 	Table,
 	TableCell,
 	TableContainer,
-	TableHead,
 	TablePagination,
 	TableRow,
 	Toolbar,
@@ -15,26 +14,8 @@ import {
 	TextField,
 	Button,
 } from '@material-ui/core'
+import { EnhancedTableHead, StatTableCell } from './TableUtils'
 import { statsContext } from '../store/StatsContext'
-import { headCells } from '../utils/tableHeadCells'
-import CountUp from 'react-countup'
-
-const EnhancedTableHead = () => {
-	return (
-		<TableHead>
-			<TableRow>
-				{headCells.map((headCell) => (
-					<TableCell
-						key={headCell.id}
-						align={headCell.numeric ? 'right' : 'left'}
-						padding={'default'}>
-						<strong>{headCell.label}</strong>
-					</TableCell>
-				))}
-			</TableRow>
-		</TableHead>
-	)
-}
 
 const CountriesTable = () => {
 	const classes = useStyles()
@@ -73,7 +54,7 @@ const CountriesTable = () => {
 		setFilteredCountries(newCountries)
 	}
 
-	React.useEffect(() => {
+	useEffect(() => {
 		setFilteredCountries(Countries)
 	}, [Countries])
 
@@ -82,21 +63,6 @@ const CountriesTable = () => {
 		emptyRows =
 			rowsPerPage -
 			Math.min(rowsPerPage, filteredCountries.length - page * rowsPerPage)
-	}
-
-	const generateStatsJsx = (givenClass, givenStat) => {
-		return (
-			<TableCell align='right' className={givenClass}>
-				<strong>
-					<CountUp
-						start={givenStat - givenStat * 0.1}
-						end={givenStat}
-						duration={1}
-						separator=','
-					/>
-				</strong>
-			</TableCell>
-		)
 	}
 
 	return filteredCountries ? (
@@ -161,30 +127,48 @@ const CountriesTable = () => {
 													{row.CountryCode})
 												</strong>
 											</TableCell>
-											{generateStatsJsx(
-												classes.confirmed,
-												row.TotalConfirmed
-											)}
-											{generateStatsJsx(
-												classes.confirmed,
-												row.NewConfirmed
-											)}
-											{generateStatsJsx(
-												classes.recovered,
-												row.TotalRecovered
-											)}
-											{generateStatsJsx(
-												classes.recovered,
-												row.NewRecovered
-											)}
-											{generateStatsJsx(
-												classes.deaths,
-												row.TotalDeaths
-											)}
-											{generateStatsJsx(
-												classes.deaths,
-												row.NewDeaths
-											)}
+											<StatTableCell
+												value={{
+													givenClass:
+														classes.confirmed,
+													givenStat:
+														row.TotalConfirmed,
+												}}
+											/>
+											<StatTableCell
+												value={{
+													givenClass:
+														classes.confirmed,
+													givenStat: row.NewConfirmed,
+												}}
+											/>
+											<StatTableCell
+												value={{
+													givenClass:
+														classes.recovered,
+													givenStat:
+														row.TotalRecovered,
+												}}
+											/>
+											<StatTableCell
+												value={{
+													givenClass:
+														classes.recovered,
+													givenStat: row.NewRecovered,
+												}}
+											/>
+											<StatTableCell
+												value={{
+													givenClass: classes.deaths,
+													givenStat: row.TotalDeaths,
+												}}
+											/>
+											<StatTableCell
+												value={{
+													givenClass: classes.deaths,
+													givenStat: row.NewDeaths,
+												}}
+											/>
 										</TableRow>
 									)
 								})}
@@ -217,6 +201,7 @@ const useStyles = makeStyles((theme) => ({
 	root: {
 		width: '100%',
 		height: '100%',
+		marginTop: '20px',
 	},
 	paper: {
 		width: '100%',
