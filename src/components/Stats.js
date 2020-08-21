@@ -1,7 +1,13 @@
 import React, { useContext } from 'react'
 import { statsContext } from '../store/StatsContext'
 
-import { Grid, Typography, Divider, CircularProgress } from '@material-ui/core'
+import {
+	Grid,
+	Typography,
+	Divider,
+	CircularProgress,
+	Backdrop,
+} from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import CountUp from 'react-countup'
 
@@ -12,17 +18,17 @@ const Stats = () => {
 
 	return (
 		<Grid item container sm={10} className={classes.container}>
-			<Grid item xs={12}>
-				<Typography variant='h4' className={classes.title}>
-					<strong>Global Stats</strong>
-				</Typography>
-			</Grid>
-			<Grid item xs={12}>
-				<Divider />
-			</Grid>
-			<Grid item container xs={12}>
-				{Global ? (
-					<>
+			{Global ? (
+				<>
+					<Grid item xs={12}>
+						<Typography variant='h4' className={classes.title}>
+							<strong>Global Stats</strong>
+						</Typography>
+					</Grid>
+					<Grid item xs={12}>
+						<Divider />
+					</Grid>
+					<Grid item container xs={12}>
 						<Grid item xs={12} sm={4}>
 							<Typography variant='h6' className={classes.stats}>
 								Total Confirmed
@@ -81,16 +87,18 @@ const Stats = () => {
 								</strong>
 							</Typography>
 						</Grid>
-					</>
-				) : (
-					<CircularProgress className={classes.spinner} />
-				)}
-			</Grid>
+					</Grid>
+				</>
+			) : (
+				<Backdrop className={classes.backdrop} open={true}>
+					<CircularProgress color='inherit' />
+				</Backdrop>
+			)}
 		</Grid>
 	)
 }
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
 	container: {
 		backgroundColor: 'lightgrey',
 	},
@@ -127,6 +135,10 @@ const useStyles = makeStyles(() => ({
 		margin: 'auto',
 		marginTop: '20px',
 		marginBottom: '20px',
+	},
+	backdrop: {
+		zIndex: theme.zIndex.drawer + 1,
+		color: '#fff',
 	},
 }))
 
