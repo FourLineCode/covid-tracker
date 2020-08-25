@@ -33,15 +33,10 @@ const Stats = () => {
 							<Typography variant='h6' className={classes.stats}>
 								Total Confirmed
 							</Typography>
-							<Typography
-								variant='h4'
-								className={classes.confirmed}>
+							<Typography variant='h4' className={classes.confirmed}>
 								<strong>
 									<CountUp
-										start={
-											Global.TotalConfirmed -
-											Global.TotalConfirmed * 0.1
-										}
+										start={Global.TotalConfirmed - Global.TotalConfirmed * 0.1}
 										end={Global.TotalConfirmed}
 										duration={1}
 										separator=','
@@ -53,15 +48,10 @@ const Stats = () => {
 							<Typography variant='h6' className={classes.stats}>
 								Total Recovered
 							</Typography>
-							<Typography
-								variant='h4'
-								className={classes.recovered}>
+							<Typography variant='h4' className={classes.recovered}>
 								<strong>
 									<CountUp
-										start={
-											Global.TotalRecovered -
-											Global.TotalRecovered * 0.1
-										}
+										start={Global.TotalRecovered - Global.TotalRecovered * 0.1}
 										end={Global.TotalRecovered}
 										duration={1}
 										separator=','
@@ -76,10 +66,7 @@ const Stats = () => {
 							<Typography variant='h4' className={classes.deaths}>
 								<strong>
 									<CountUp
-										start={
-											Global.TotalDeaths -
-											Global.TotalDeaths * 0.1
-										}
+										start={Global.TotalDeaths - Global.TotalDeaths * 0.1}
 										end={Global.TotalDeaths}
 										duration={1}
 										separator=','
@@ -114,22 +101,25 @@ const useStyles = makeStyles((theme) => ({
 		marginTop: '10px',
 	},
 	confirmed: {
-		color: 'orange',
+		color: 'darkorange',
 		textAlign: 'center',
 		opacity: 0.7,
 		marginBottom: '10px',
+		textShadow: '1px 1px black',
 	},
 	recovered: {
 		color: 'green',
 		textAlign: 'center',
 		opacity: 0.7,
 		marginBottom: '10px',
+		textShadow: '1px 1px black',
 	},
 	deaths: {
 		color: 'red',
 		textAlign: 'center',
 		opacity: 0.7,
 		marginBottom: '10px',
+		textShadow: '1px 1px black',
 	},
 	spinner: {
 		margin: 'auto',

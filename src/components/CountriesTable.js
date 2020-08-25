@@ -107,53 +107,40 @@ const CountriesTable = () => {
 						<EnhancedTableHead />
 						<TableBody>
 							{filteredCountries
-								.slice(
-									page * rowsPerPage,
-									page * rowsPerPage + rowsPerPage
-								)
+								.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
 								.map((row, index) => {
 									return (
-										<TableRow
-											hover
-											tabIndex={-1}
-											key={row.Country}>
+										<TableRow hover tabIndex={-1} key={row.Country}>
 											<TableCell
 												component='th'
 												id={index}
 												scope='row'
 												padding='default'>
 												<strong>
-													{row.Country} (
-													{row.CountryCode})
+													{row.Country} ({row.CountryCode})
 												</strong>
 											</TableCell>
 											<StatTableCell
 												value={{
-													givenClass:
-														classes.confirmed,
-													givenStat:
-														row.TotalConfirmed,
+													givenClass: classes.confirmed,
+													givenStat: row.TotalConfirmed,
 												}}
 											/>
 											<StatTableCell
 												value={{
-													givenClass:
-														classes.confirmed,
+													givenClass: classes.confirmed,
 													givenStat: row.NewConfirmed,
 												}}
 											/>
 											<StatTableCell
 												value={{
-													givenClass:
-														classes.recovered,
-													givenStat:
-														row.TotalRecovered,
+													givenClass: classes.recovered,
+													givenStat: row.TotalRecovered,
 												}}
 											/>
 											<StatTableCell
 												value={{
-													givenClass:
-														classes.recovered,
+													givenClass: classes.recovered,
 													givenStat: row.NewRecovered,
 												}}
 											/>
@@ -228,22 +215,25 @@ const useStyles = makeStyles((theme) => ({
 		marginBottom: '20px',
 	},
 	confirmed: {
-		color: 'orange',
+		color: 'darkorange',
 		textAlign: 'center',
 		opacity: 0.7,
 		marginBottom: '10px',
+		textShadow: '0.5px 0.5px black',
 	},
 	recovered: {
 		color: 'green',
 		textAlign: 'center',
 		opacity: 0.7,
 		marginBottom: '10px',
+		textShadow: '0.5px 0.5px black',
 	},
 	deaths: {
 		color: 'red',
 		textAlign: 'center',
 		opacity: 0.7,
 		marginBottom: '10px',
+		textShadow: '0.5px 0.5px black',
 	},
 	search: {
 		textAlign: 'center',
