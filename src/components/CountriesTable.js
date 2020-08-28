@@ -1,4 +1,5 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useEffect } from 'react'
+import { connect } from 'react-redux'
 import { makeStyles } from '@material-ui/core/styles'
 import {
 	TableBody,
@@ -15,16 +16,15 @@ import {
 	Button,
 } from '@material-ui/core'
 import { EnhancedTableHead, StatTableCell } from './TableUtils'
-import { statsContext } from '../store/StatsContext'
 
-const CountriesTable = () => {
+const CountriesTable = (props) => {
 	const classes = useStyles()
 	const [rowsPerPage, setRowsPerPage] = React.useState(10)
 	const [page, setPage] = React.useState(0)
 	const [input, setInput] = React.useState('')
 	const [filteredCountries, setFilteredCountries] = React.useState([])
 
-	const { Countries } = useContext(statsContext)
+	const { Countries } = props
 	if (Countries) {
 		Countries.sort((a, b) => b.TotalConfirmed - a.TotalConfirmed)
 	}
@@ -244,4 +244,10 @@ const useStyles = makeStyles((theme) => ({
 	},
 }))
 
-export default CountriesTable
+const mapStateToProps = (state) => {
+	return {
+		Countries: state.stats.Countries,
+	}
+}
+
+export default connect(mapStateToProps)(CountriesTable)

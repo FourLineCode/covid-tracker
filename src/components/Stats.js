@@ -1,6 +1,5 @@
-import React, { useContext } from 'react'
-import { statsContext } from '../store/StatsContext'
-
+import React from 'react'
+import { connect } from 'react-redux'
 import {
 	Grid,
 	Typography,
@@ -11,10 +10,9 @@ import {
 import { makeStyles } from '@material-ui/core/styles'
 import CountUp from 'react-countup'
 
-const Stats = () => {
+const Stats = (props) => {
 	const classes = useStyles()
-
-	const { Global } = useContext(statsContext)
+	const { Global } = props
 
 	return (
 		<Grid item container sm={10} className={classes.container}>
@@ -132,4 +130,10 @@ const useStyles = makeStyles((theme) => ({
 	},
 }))
 
-export default Stats
+const mapStateToProps = (state) => {
+	return {
+		Global: state.stats.Global,
+	}
+}
+
+export default connect(mapStateToProps)(Stats)
