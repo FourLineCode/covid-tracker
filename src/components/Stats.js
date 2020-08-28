@@ -85,13 +85,14 @@ const Stats = (props) => {
 
 const useStyles = makeStyles((theme) => ({
 	container: {
-		backgroundColor: 'lightgrey',
+		backgroundColor: 'rgb(240,240,240)',
 	},
 	title: {
 		color: '#0466AD',
 		textAlign: 'center',
 		marginTop: '10px',
 		marginBottom: '10px',
+		textShadow: '1px 1px black',
 	},
 	stats: {
 		textAlign: 'center',

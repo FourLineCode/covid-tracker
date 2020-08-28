@@ -193,7 +193,7 @@ const useStyles = makeStyles((theme) => ({
 	paper: {
 		width: '100%',
 		marginBottom: theme.spacing(2),
-		backgroundColor: 'lightgrey',
+		backgroundColor: 'rgb(240,240,240)',
 	},
 	table: {
 		minWidth: 750,
@@ -208,6 +208,7 @@ const useStyles = makeStyles((theme) => ({
 		textAlign: 'center',
 		marginTop: '10px',
 		marginBottom: '10px',
+		textShadow: '1px 1px black',
 	},
 	spinner: {
 		margin: 'auto',
@@ -219,21 +220,21 @@ const useStyles = makeStyles((theme) => ({
 		textAlign: 'center',
 		opacity: 0.7,
 		marginBottom: '10px',
-		textShadow: '0.5px 0.5px black',
+		textShadow: '1px 1px black',
 	},
 	recovered: {
 		color: 'green',
 		textAlign: 'center',
 		opacity: 0.7,
 		marginBottom: '10px',
-		textShadow: '0.5px 0.5px black',
+		textShadow: '1px 1px black',
 	},
 	deaths: {
 		color: 'red',
 		textAlign: 'center',
 		opacity: 0.7,
 		marginBottom: '10px',
-		textShadow: '0.5px 0.5px black',
+		textShadow: '1px 1px black',
 	},
 	search: {
 		textAlign: 'center',
